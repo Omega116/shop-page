@@ -45,11 +45,7 @@ document.querySelectorAll(".little-image").forEach((picture) =>
     let id = Number(picture.getAttribute("id"));
     picture
       .closest(".display-block")
-      .querySelector(".showcased-item").innerHTML = `<img
-              class='scalable-image'
-              src="images/image-product-${id}.jpg"
-              alt="showcased shoes picture"
-            />`;
+      .querySelector(".scalable-image").src = `images/image-product-${id}.jpg`;
   })
 );
 
@@ -58,12 +54,17 @@ document
   .querySelector(".scalable-image")
   .addEventListener("mousemove", function (e) {
     const infoBlock = document.querySelector(".info-block");
+    let id = Number(
+      document.querySelector(".active-box>img").getAttribute("id")
+    );
+    const zoomedImg = document.querySelector(".zoom-image");
+    zoomedImg.src = `images/image-product-${id}.jpg`;
     zoomDiv.style.display = "block";
     infoBlock.style.margin = "0";
     let start = document.querySelector("main").clientWidth * 0.09;
     let x = (e.clientX - start) / 400;
     let y = (e.clientY - 220) / 400;
-    console.log(x, y);
+    zoomedImg.style.transform = `translate3d(-${200 * x}px,-${200 * y}px,0px)`;
   });
 document
   .querySelector(".scalable-image")
