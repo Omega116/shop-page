@@ -2,6 +2,7 @@
 
 let quantity = 0;
 let price = 125;
+const zoomDiv = document.querySelector(".zoom");
 
 window.addEventListener("click", function (e) {
   if (e.target.closest(".plus-icon")) {
@@ -31,15 +32,10 @@ window.addEventListener("click", function (e) {
       currentPrice.innerText = `125.00`;
     }
   }
-  if (e.target.closest(".little-image")) {
-  }
-  /* if (e.target === document.querySelector()) {
-  } */
 });
 
 document.querySelectorAll(".little-image").forEach((picture) =>
   picture.addEventListener("mouseover", function (e) {
-    e.preventDefault();
     picture
       .closest(".all-images")
       .querySelectorAll(".image-box")
@@ -60,4 +56,19 @@ document.querySelectorAll(".little-image").forEach((picture) =>
 /* zoom effect */
 document
   .querySelector(".scalable-image")
-  .addEventListener("mousemove", function (e) {});
+  .addEventListener("mousemove", function (e) {
+    const infoBlock = document.querySelector(".info-block");
+    zoomDiv.style.display = "block";
+    infoBlock.style.margin = "0";
+    let start = document.querySelector("main").clientWidth * 0.09;
+    let x = (e.clientX - start) / 400;
+    let y = (e.clientY - 220) / 400;
+    console.log(x, y);
+  });
+document
+  .querySelector(".scalable-image")
+  .addEventListener("mouseleave", function (e) {
+    const infoBlock = document.querySelector(".info-block");
+    zoomDiv.style.display = "none";
+    infoBlock.style.margin = "auto 0 ";
+  });
